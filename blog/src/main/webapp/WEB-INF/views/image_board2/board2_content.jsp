@@ -30,7 +30,7 @@
 		<td> ${content.content } </td>
 		<td> 이미지 </td>
 		<td>
-			<img src = "/blog/resources/upload2/${content.image }" />
+			<img src = "/blog/resources/upload/${content.image }" />
 		</td>
 	</tr>
 </table>

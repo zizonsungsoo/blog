@@ -7,7 +7,7 @@
 
 <insert id = "insert">
 	insert into imageboard2
-	values(imageboard2_seq.nextval, #{id}, #{title}, #{content}, #{image}, #{readcount}, sysdate)
+	values(imageboard2_seq.nextval, #{id}, #{title}, #{content}, #{image}, 0, sysdate)
 </insert>
 
 <select id = "board2list" resultType = "board2DTO">
