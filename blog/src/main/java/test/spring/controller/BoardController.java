@@ -90,22 +90,26 @@ public class BoardController {
 
 	//게시글 자세히보기
 	@RequestMapping("/detailboard")
-	public String detailboard(Board_CommentDTO cdto, String writer, String num, Model model) {
+	public String detailboard(Board_CommentDTO cdto, HttpSession session,String writer, String num, Model model) {
+		cdto.setCwriter((String)session.getAttribute("memId"));
 		BoardDTO dto = service.boardAll(writer, num);
 		service.updatereadcnt(num);
+		List<Board_CommentDTO> list=service.boardConmmentAll(num);
 		model.addAttribute("dto", dto);
+		model.addAttribute("list", list);
 		model.addAttribute("commentcount", service.countBoardComment(num));
 		return "/board/detailboard";
 	}
 	@RequestMapping("/detailboardPro")
-	public String detailboardPro(Board_CommentDTO cdto,String writer, String num, Model model) {
+	public String detailboardPro(Board_CommentDTO cdto, HttpSession session,String writer, String num, Model model) {
+		cdto.setCwriter((String)session.getAttribute("memId"));
 		BoardDTO dto = service.boardAll(writer, num);
 		service.insertBoardComment(cdto);
 		List<Board_CommentDTO> list=service.boardConmmentAll(num);
 		model.addAttribute("dto", dto);
 		model.addAttribute("commentcount", service.countBoardComment(num));
 		model.addAttribute("list", list);
-		return "redirect:/board/detailboard";
+		return "/board/detailboard";
 	}
 	
 }
