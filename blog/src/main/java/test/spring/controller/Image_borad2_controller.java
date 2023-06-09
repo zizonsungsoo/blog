@@ -56,6 +56,8 @@ public class Image_borad2_controller {
 	            copy = new File(uploadPath+"//"+name+"("+index+")"+ext); //중복된 파일이름 끝에 index의 값을 붙여서 폴더에 업로드
 	            img = name+"("+index+")"+ext; //index가 끝에 붙어 변경된 파일이름을 img에 대입
 	         }
+	         
+	         //이미지 파일인지 검사
 	         if(type.split("/")[0].equals("image")){
 	        	 save.transferTo(copy);
 	         }
