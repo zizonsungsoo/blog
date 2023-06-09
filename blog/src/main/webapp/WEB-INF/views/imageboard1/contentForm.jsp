@@ -7,6 +7,21 @@
 <title>게시판</title>
 </head>
 
+		<script language = "javascript" >
+			function checkIn() {
+				var content = document.chat.content.value;
+				if(!content) {
+					alert("댓글을 입력해주세요");
+					document.chat.content.focus();
+					return false;
+				}
+				if('${memId} == null || ${memId} == ""') {
+					alert("로그인후 다시 작성하시기바랍니다.");
+					return false;
+				}
+			}
+		</script>
+
 <center><b>글내용 보기</b>
 <br>
 	<table width = "500" border = "1" cellspacing = "0" cellpadding = "0" align  ="center">
@@ -65,7 +80,7 @@
 <!-- ---------------------------------------------------------------------------------------------- -->
 		
 		
-		<form name = "chat" action = "contentPro" method = "post" >
+		<form name = "chat" action = "contentPro" method = "post" onSubmit = "return checkIn()" >
 		<tr>
 			<td align = "center" >
 				${memId}

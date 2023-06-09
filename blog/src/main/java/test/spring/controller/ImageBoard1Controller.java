@@ -243,7 +243,7 @@ public class ImageBoard1Controller {
 	public String contentForm(ImageBoard1DTO dto, HttpSession session, HttpServletRequest request, Model model) {
 
 		String memId = (String)session.getAttribute("memId");
-
+		
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 		service.addReadcount(num, (service.numContent(num).getReadcount() + 1));
