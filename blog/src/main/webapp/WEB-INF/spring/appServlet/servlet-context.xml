@@ -20,23 +20,9 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	<!-- 최상위 페키지 -->
-	<context:component-scan base-package="blog.framework.spring" />
-	<!-- DTO, 컨트롤러와 연결된 작업 -->
-	<context:component-scan base-package="test.spring.component" />
-	<!-- 요청을 받음 -->
-	<context:component-scan base-package="test.spring.controller" />
 	
-	<!-- 연산 -->
-	<context:component-scan base-package="test.spring.service" />
+	<context:component-scan base-package="test.framework.spring" />
 	
-	<beans:bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="defaultEncoding" value="UTF-8" />
-		<beans:property name="maxUploadSize" value="-1" />
-		<beans:property name="maxUploadSizePerFile" value="2097152" />
-		<beans:property name="uploadTempDir" value="file:/c:/upload/tmp" />
-	</beans:bean>
 	
 	
 </beans:beans>
