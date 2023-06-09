@@ -44,6 +44,26 @@ public class ImageBoard1ServiceImpl implements ImageBoard1Service {
 	}
 	
 	@Override
+	public void update(ImageBoard1DTO dto) {
+		mapper.update(dto);
+	}
+	
+	@Override
+	public int delete(ImageBoard1DTO dto) {
+		return mapper.delete(dto);
+	}
+	
+	@Override
+	public int subDeleteAll(ImageBoard1DTO dto) {
+		return mapper.subDeleteAll(dto);
+	}
+	
+	@Override
+	public void subDelete(int num) {
+		mapper.subDelete(num);
+	}
+	
+	@Override
 	public ImageBoard1DTO numContent(int num) {
 		return mapper.numContent(num);
 	}

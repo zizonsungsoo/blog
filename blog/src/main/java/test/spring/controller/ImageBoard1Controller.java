@@ -24,8 +24,7 @@ public class ImageBoard1Controller {
 	@RequestMapping("list")
 	public String list(HttpSession session, HttpServletRequest request, Model model) {
 		
-	//	String memId = (String)session.getAttribute("memId");
-		String memId = "test";
+		String memId = (String)session.getAttribute("memId");
 		
 		int pageSize = 50;
 		String pageNum = request.getParameter("pageNum");
@@ -68,8 +67,7 @@ public class ImageBoard1Controller {
 	@RequestMapping("mylist")
 	public String mylist(HttpSession session, HttpServletRequest request, Model model) {
 		
-	//	String memId = (String)session.getAttribute("memId");
-		String memId = "test";
+		String memId = (String)session.getAttribute("memId");
 		
 		int pageSize = 50;
 		String pageNum = request.getParameter("pageNum");
@@ -111,8 +109,8 @@ public class ImageBoard1Controller {
 	
 	@RequestMapping("writeForm")
 	public String sessionWriteForm(HttpSession session, Model model) {
-	//	String memId = (String)session.getAttribute("memId");
-		String memId = "test";
+		String memId = (String)session.getAttribute("memId");
+
 		model.addAttribute("memContent", service.memContent(memId));
 		model.addAttribute("memId", memId);
 		
@@ -122,8 +120,8 @@ public class ImageBoard1Controller {
 	@RequestMapping("writePro")
 	public String sessionWritePro(MultipartFile [] save, ImageBoard1DTO dto, HttpSession session, HttpServletRequest request, Model model) {
 		
-	//	String memId = (String)session.getAttribute("memId");
-		String memId = "test";
+		String memId = (String)session.getAttribute("memId");
+
 		dto.setIp(request.getRemoteAddr());
 		
 		String [] file_Name = new String[2];
@@ -184,8 +182,8 @@ public class ImageBoard1Controller {
 	@RequestMapping("updatePro")
 	public String sessionUpdatePro(MultipartFile [] save, ImageBoard1DTO dto, HttpSession session, HttpServletRequest request, Model model) {
 		
-	//	String memId = (String)session.getAttribute("memId");
-		String memId = "test";
+		String memId = (String)session.getAttribute("memId");
+
 		dto.setIp(request.getRemoteAddr());
 		
 		String [] file_Name = new String[2];
@@ -195,41 +193,48 @@ public class ImageBoard1Controller {
 		System.out.println(uploadPath);
 		
 		for(int i = 0; i < save.length; i++) {
-			File copy = null;
-			String file_name = save[i].getOriginalFilename();
-			int a = 0;
-			try {
-				File file = new File(uploadPath+"//"+file_name);
-				boolean exists = file.exists();
-				while(true) {
-					if(exists) {
-						file_name = String.valueOf(((int)( a + 1 ))) + save[i].getOriginalFilename();
-						a = a + 1;
-						file = new File(uploadPath+"//"+file_name);
-						exists = file.exists();
-					}else {
-						copy = new File(uploadPath+"//"+file_name);
-						break;
+			if(save[i] != null) {
+				File copy = null;
+				String file_name = save[i].getOriginalFilename();
+				int a = 0;
+				try {
+					File file = new File(uploadPath+"//"+file_name);
+					boolean exists = file.exists();
+					while(true) {
+						if(exists) {
+							file_name = String.valueOf(((int)( a + 1 ))) + save[i].getOriginalFilename();
+							a = a + 1;
+							file = new File(uploadPath+"//"+file_name);
+							exists = file.exists();
+						}else {
+							copy = new File(uploadPath+"//"+file_name);
+							break;
+						}
 					}
-				}
-				String OrgName = save[i].getOriginalFilename();
-				String name = save[i].getContentType();
-				if(OrgName != null) {
-					String [] type = name.split("/");	// 업로드하는 파일의 타입을 체크하는 메소드
-					if(type[0].equals("image")) {
-						save[i].transferTo(copy); //업로드
-						file_Name[i] = file_name;
-						System.out.println("사진입니다. 업로드 완료!!!");
-					}else {
-						System.out.println("사진만 업로드 가능합니다. 다시 업로드하세요");
+					String OrgName = save[i].getOriginalFilename();
+					String name = save[i].getContentType();
+					if(OrgName != null) {
+						String [] type = name.split("/");	// 업로드하는 파일의 타입을 체크하는 메소드
+						if(type[0].equals("image")) {
+							save[i].transferTo(copy); //업로드
+							file_Name[i] = file_name;
+							System.out.println("사진입니다. 업로드 완료!!!");
+						}else {
+							System.out.println("사진만 업로드 가능합니다. 다시 업로드하세요");
+						}
 					}
-				}
-			}catch(Exception e) { e.printStackTrace(); }
+				}catch(Exception e) { e.printStackTrace(); }
+			}
 		}
-		dto.setThumbnail(file_Name[0]);
-		dto.setImage(file_Name[1]);
 		
-		service.write(dto);
+		if(file_Name[0] != null && file_Name[0] != "") {
+			dto.setThumbnail(file_Name[0]);
+		}
+		if(file_Name[1] != null && file_Name[1] != "") {
+			dto.setImage(file_Name[1]);
+		}
+		
+		service.update(dto);
 		
 		return "/imageboard1/writePro";
 	}
@@ -237,8 +242,8 @@ public class ImageBoard1Controller {
 	@RequestMapping("contentForm")
 	public String contentForm(ImageBoard1DTO dto, HttpSession session, HttpServletRequest request, Model model) {
 
-	//	String memId = (String)session.getAttribute("memId");
-		String memId = "test";
+		String memId = (String)session.getAttribute("memId");
+
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 		service.addReadcount(num, (service.numContent(num).getReadcount() + 1));
@@ -321,6 +326,44 @@ public class ImageBoard1Controller {
 		service.subWrite(dto);
 		
 		return "forward:/imageboard1/contentForm?num="+num+"&pageNum="+pageNum+"&pr_pageNum="+pr_pageNum;
+	}
+	
+	@RequestMapping("contentDelete")
+	public String deleteForm(HttpServletRequest request, Model model) {		
+		int num = Integer.valueOf(request.getParameter("num"));
+		String pageNum = request.getParameter("pageNum");
+		ImageBoard1DTO dto =service.numContent(num);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("pageNum", pageNum);
+		
+		return "/imageboard1/contentDelete";
+	}
+	
+	@RequestMapping("contentDeletePro")
+	public String deletePro(ImageBoard1DTO dto, HttpServletRequest request, Model model) {		
+		String pageNum = request.getParameter("pageNum");
+		int result = service.delete(dto);
+		if(result == 1) {
+			service.subDeleteAll(dto);
+		}
+		model.addAttribute("result", result);
+		model.addAttribute("num", dto.getNum());
+		model.addAttribute("pageNum", pageNum);
+		
+		return "/imageboard1/contentDeletePro";
+	}
+	
+	@RequestMapping("subDelete")
+	public String subDelete(ImageBoard1DTO dto, HttpServletRequest request, Model model) {		
+		int contentNum = Integer.valueOf(request.getParameter("contentnum"));
+		String num = request.getParameter("num");
+		String pageNum = request.getParameter("pageNum");
+		
+		
+		service.subDelete(contentNum);
+		
+		return "forward:/imageboard1/contentForm?num=" + num + "&pageNum=" + pageNum;
 	}
 	
 }

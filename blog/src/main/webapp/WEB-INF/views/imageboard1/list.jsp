@@ -39,7 +39,7 @@
 		<c:forEach var = "dto" items = "${boardList}" varStatus = "vs">
 			<tr height = "500" >
 				<td align = "center" width = "500" >
-					<a href="/blog/imageboard1/contentForm?num=${dto.num}&pageNum=${currentPage}">
+					<a href="/blog/imageboard1/contentForm?num=${dto.num}&pageNum=${currentPage}&pr_pageNum=1">
 						<img src = "/blog/resources/upload/${dto.thumbnail}" width = "500" height = "400" />
 					</a><br />
 					<h3> ${dto.subject} </h3>

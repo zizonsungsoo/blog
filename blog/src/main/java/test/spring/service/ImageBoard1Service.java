@@ -17,6 +17,14 @@ public interface ImageBoard1Service {
 	
 	public void write(ImageBoard1DTO dto);
 	
+	public void update(ImageBoard1DTO dto);
+	
+	public int delete(ImageBoard1DTO dto);
+	
+	public int subDeleteAll(ImageBoard1DTO dto);
+	
+	public void subDelete(int num);
+	
 	public ImageBoard1DTO numContent(int num);
 	
 	public void addReadcount(int num, int count);

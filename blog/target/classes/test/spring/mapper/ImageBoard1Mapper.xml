@@ -27,14 +27,38 @@
 	</select>
 	
 	<select id="memContent" resultType="ImageBoard1DTO" >
-		select * from sample where id=#{memId}
-		<!-- sample 변경 -->
+		select * from member where id=#{memId}
 	</select>
 	
 	<insert id = "write" parameterType="test.spring.component.ImageBoard1DTO" >
 		insert into imageboard1 values (imageboard1_seq.NEXTVAL, #{thumbnail}, #{writer}, #{subject}, #{email}, #{content}, 
 		#{image}, #{passwd}, sysdate, #{readcount}, #{ip})
 	</insert>
+	
+	<update id="update">
+		update imageboard1
+		<set>
+			<if test="thumbnail != null">thumbnail=#{thumbnail},</if>
+			<if test="subject != null">subject=#{subject},</if>
+			<if test="email != null">email=#{email},</if>
+			<if test="content != null">content=#{content},</if>
+			<if test="image != null">image=#{image},</if>
+			<if test="ip != null">ip=#{ip}</if>
+		</set>
+		where num=#{num}
+	</update>
+	
+	<delete id="delete" >
+		delete from imageboard1 where num = #{num} and passwd = #{passwd}
+	</delete>
+	
+	<delete id="subDeleteAll" >
+		delete from subboard1 where boardnum = #{num}
+	</delete>
+	
+	<delete id="subDelete" >
+		delete from subboard1 where num = #{num}
+	</delete>
 	
 	<select id = "numContent" resultType = "test.spring.component.ImageBoard1DTO" >
 		select * from imageboard1 where num = #{num}

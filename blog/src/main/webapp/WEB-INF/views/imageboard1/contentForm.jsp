@@ -49,7 +49,7 @@
 					onclick = "document.location.href='updateForm?num=${dto.num}&pageNum=${pageNum}'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type = "button" value = "글삭제"
-					onclick = "document.location.href='deleteForm?num=${dto.num}&pageNum=${pageNum}'">
+					onclick = "document.location.href='contentDelete?num=${dto.num}&pageNum=${pageNum}'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 				</c:if>
 				<c:if test="${memId.equals('admin')}">
@@ -100,7 +100,7 @@
 								<font size = "1px"> ${contentBoard.reg_date} </font>
 								<c:if test="${memId.equals(contentBoard.writer)}" >
 									<input type = "button" value = "글삭제"
-									onclick = "document.location.href='subDelete.jsp?num=${dto.num}&contentnum=${contentBoard.num}&pageNum=${pageNum}&pr_pageNum=${pr_pageNum}'">
+									onclick = "document.location.href='subDelete?num=${dto.num}&contentnum=${contentBoard.num}&pageNum=${pageNum}&pr_pageNum=${pr_pageNum}'">
 								</c:if>
 								<input type = "radio" name = "pick" value = "${contentBoard.num}" style="width:10px;height:10px;border:1px;">
 								<br />
@@ -112,13 +112,16 @@
 					<c:if test="${contentBoard.ref != contentBoard.num}" >
 						<tr rowspan = "2" >	
 							<td colspan = "4" align = "left" width = "400" >
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<img src = "images/re.gif">
+								<c:forEach var="i" begin="1" end="${contentBoard.re_level}" step="1" >
+									&nbsp;&nbsp;&nbsp;
+								</c:forEach>
+								&nbsp;&nbsp;
+								<img src = "/blog/resources/images/re.gif">
 								<b>${contentBoard.writer}</b>
 								<font size = "1px"> ${contentBoard.reg_date} </font>
 								<c:if test="${memId.equals(contentBoard.writer)}" >
 									<input type = "button" value = "글삭제"
-									onclick = "document.location.href='brand_notice_subDelete.jsp?num=${dto.num}&contentnum=${contentBoard.num}&pageNum=${pageNum}&pr_pageNum=${pr_pageNum}'">
+									onclick = "document.location.href='subDelete?num=${dto.num}&contentnum=${contentBoard.num}&pageNum=${pageNum}&pr_pageNum=${pr_pageNum}'">
 								</c:if>
 								<input type = "radio" name = "pick" value = "${contentBoard.num}" style="width:10px;height:10px;border:1px;">
 								<br />
@@ -146,8 +149,11 @@
 					<c:if test="${contentBoard.ref != contentBoard.num}" >
 						<tr rowspan = "2" >	
 							<td colspan = "4" align = "left" width = "400" >
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<img src = "images/re.gif">
+								<c:forEach var="i" begin="1" end="${contentBoard.re_level}" step="1" >
+									&nbsp;&nbsp;&nbsp;
+								</c:forEach>
+								&nbsp;&nbsp;
+								<img src = "/blog/resources/images/re.gif">
 								<b>${contentBoard.writer}</b>
 								<font size = "1px"> ${contentBoard.reg_date} </font>
 								<br />
@@ -164,13 +170,13 @@
 			<td colspan = "4" align = "center" >
 				<c:if test="${count > 0}" >
 					<c:if test="${startPage > 10}" >
-						<a href = "/blog/imageboard1/contentForm?num?=${dto.num}&pageNum=${pageNum}&pr_pageNum=${startPage - 10}">[이전]</a>
+						<a href = "/blog/imageboard1/contentForm?num=${dto.num}&pageNum=${pageNum}&pr_pageNum=${startPage - 10}">[이전]</a>
 					</c:if>	
 					<c:forEach var = "i" items = "${page}" >
-						<a href = "/blog/imageboard1/contentForm?num?=${dto.num}&pageNum=${pageNum}&pr_pageNum=${i}">[${i}]</a>
+						<a href = "/blog/imageboard1/contentForm?num=${dto.num}&pageNum=${pageNum}&pr_pageNum=${i}">[${i}]</a>
 					</c:forEach>
 					<c:if test="${endPage < pageCount}" >
-						<a href = "/blog/imageboard1/contentForm?num?=${dto.num}&pageNum=${pageNum}&pr_pageNum=${startPage + 10}">[다음]</a>
+						<a href = "/blog/imageboard1/contentForm?num=${dto.num}&pageNum=${pageNum}&pr_pageNum=${startPage + 10}">[다음]</a>
 					</c:if>
 				</c:if>
 			</td>
