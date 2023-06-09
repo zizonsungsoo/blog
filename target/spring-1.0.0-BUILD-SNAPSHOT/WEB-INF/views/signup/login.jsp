@@ -2,8 +2,8 @@
          pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--아래는 css부분(부트스트랩 포함)--%>
-<link href="css/Style.css" rel="stylesheet" type="text/css">
-<script src="js/login.js"></script>
+<link href="${pageContext.request.contextPath}/resources/static/css/style.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/static/js/login.js" rel="script">
 <script type="text/javascript">
     window.onpageshow = function (event) {
         if (event.persisted || (window.performance && window.performance.navigation.type == 2)) {
