@@ -44,10 +44,8 @@ public class GuestbookController {
 		return "redirect:/blog/guestbook";
 	}
 	@RequestMapping("update")
-	public String update(HttpServletRequest request) {
-		int num = Integer.parseInt(request.getParameter("num"));
-		service.updata(num);
+	public String update(String content,int num) {
+		service.update(num, content);
 		return "redirect:/blog/guestbook";
 	}
-	
 }

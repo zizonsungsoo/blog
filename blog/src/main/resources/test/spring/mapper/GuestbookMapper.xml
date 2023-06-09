@@ -20,7 +20,7 @@
   	  delete from guestbook where num=#{num}
 	</delete>
 	
-	<update id="update" parameterType="int">
-		update content from guestbook where num=#{num}
+	<update id="update">
+		update guestbook set content=#{content} where num=#{num}
 	</update>
 </mapper>

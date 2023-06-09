@@ -12,7 +12,7 @@ public interface GuestbookService {
 
 	public void delete(int num);
 
-	public void updata(int num);
+	void update(int num, String content);
 
 	
 }

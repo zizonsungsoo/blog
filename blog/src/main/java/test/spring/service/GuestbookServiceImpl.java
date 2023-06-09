@@ -16,7 +16,6 @@ public class GuestbookServiceImpl implements GuestbookService{
 	@Override
 	public void insert(guestbookDTO dto){
 		mapper.insert(dto);
-			
 	}
 
 	@Override
@@ -33,10 +32,9 @@ public class GuestbookServiceImpl implements GuestbookService{
 	public void delete(int num) {
 		mapper.delete(num);
 	}
-
 	@Override
-	public void updata(int num) {
-		mapper.update(num);
+	public void update(int num,String content) {
+		mapper.update(num, content);
 	}
 	
 }

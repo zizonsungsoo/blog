@@ -56,17 +56,18 @@
 	${dto.content}
 		</td>
 	</tr>
-	<%-- <c:if test="${sessionScope.id != null }"> --%>
-		<form>
+	<%-- <c:if test="${sessionScope.memId != null }"> --%>
+		<form action="update">
 	<tr>
 		<td colspan="2" align="center">
 			<textarea name="content" rows="10" cols="65"></textarea>
+		
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<input type="button" value="수정" onclick="location='update?num=${dto.num}'">
-		
+			<input type="submit" value="수정">
+			<input type="hidden" name="num" value="${dto.num}">
 			<input type="button" value="삭제" onclick="location='delete?num=${dto.num}'">
 		</td>
 	</tr>	
