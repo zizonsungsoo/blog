@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- mapper DTD 선언 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.spring.mapper.SignUpMapper">
+    <select id="count" resultType="int">
+        select count(*) from member
+    </select>
+    <select id="loginCheck" resultType="int" parameterType="test.spring.component.SignUpDTO">
+        select count(*) from member where id=#{id} and pw=#{pw}
+    </select>
+    <insert id="insert" parameterType="test.spring.component.SignUpDTO">
+        insert into member(id, pw, nick, ssn, email, phone, name) VALUES(#{id},#{pw},#{nick},#{ssn},#{email},#{phone},#{name})
+    </insert>
+    <select id="id_chk" resultType="int" parameterType="String">
+        select count(*) from member where id=#{id} or nick=#{nick}
+    </select>
+
+</mapper>
