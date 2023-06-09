@@ -43,7 +43,7 @@
     </div>
     <div class="main_area">
         <div>
-
+            <h2>테스트용</h2>
         </div>
     </div>
 </div>
