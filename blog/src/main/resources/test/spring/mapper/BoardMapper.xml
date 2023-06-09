@@ -7,14 +7,6 @@
 		insert into board
 		values(board_seq.nextval,#{writer},#{subject},#{email},#{content},#{password},sysdate,'0','0','0','0')
 	</insert>
-
-	<select id="boardList"
-		resultType="test.spring.component.BoardDTO">
-		select * from board order by num desc
-	</select>
-	<select id="count" resultType="int">
-		select count(*) from board
-	</select>
 	<select id="boardAll"
 		resultType="test.spring.component.BoardDTO">
 		select * from board
@@ -67,6 +59,15 @@
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 
-
-
+<!-- 댓글 등록 -->
+<insert id="insertBoardComment">
+		insert into board_comment
+		values(board_comment_seq.nextval,#{num},#{content},#{cwriter},sysdate)
+	</insert>
+<select id="boardConmmentAll" resultType="test.spring.component.Board_CommentDTO">
+		select * from board_comment where num=#{num}
+	</select>
+	<select id="countBoardComment" resultType="int">
+		SELECT COUNT(*) FROM board_comment where num=#{num}
+	</select>
 </mapper>

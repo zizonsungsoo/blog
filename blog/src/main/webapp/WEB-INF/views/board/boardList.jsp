@@ -21,8 +21,8 @@
 		alert("수정 성공.");
 	</script>
 </c:if>
+	<div align="center">
 	<b>글목록(전체 글 :${count})</b>
-	<div style="float: right;">
 		<select id="cntPerPage" name="sel" onchange="selChange()">
 			<option value="5"
 				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
@@ -34,7 +34,7 @@
 				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
 		</select>
 	</div> <!-- 옵션선택 끝 -->
-		<form action="/blog/board/insert">
+		<form action="/blog/board/insert" align="center">
 			<input type="submit" value="글쓰기">
 			<input type="button" value="글목록" onclick="location.href='/blog/board/boardList'"/>
 		</form>
@@ -67,7 +67,7 @@
 		</c:forEach>
 </table>
 	</c:if>
-	<div text-align: center;">		
+	<div align="center">		
 		<c:if test="${paging.startPage != 1 }">
 			<a href="/blog/board/boardList?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>
