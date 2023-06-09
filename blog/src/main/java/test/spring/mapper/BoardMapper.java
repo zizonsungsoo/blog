@@ -23,4 +23,5 @@ public interface BoardMapper {
 	public List<Board_CommentDTO> boardConmmentAll(@Param("num") String num);
 	public int countBoardComment(String num);
 	public int updateBoardComment(Board_CommentDTO dto);
+	public int deleteBoardComment(Board_CommentDTO dto);
 }

@@ -80,6 +80,8 @@
 				<td align="center" width="350" >${cdto.content}</td>
 				<td align="center"  width="250">
 				<fmt:formatDate value="${cdto.reg_date}" pattern="yyyy년 MM월 dd일 a hh시 mm분 " /></td>
+				<td><input type="button" value="댓글삭제" 
+       onclick="document.location.href='deleteComment?num=${dto.num}'"></td>
 			</tr>
 		</c:forEach>
 	</c:if>

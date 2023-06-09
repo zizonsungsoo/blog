@@ -111,5 +111,13 @@ public class BoardController {
 		model.addAttribute("list", list);
 		return "/board/detailboard";
 	}
-	
+	@RequestMapping("/deleteComment")
+	public String deleteComment(HttpSession session,Board_CommentDTO cdto) {
+		String memId = (String)session.getAttribute("memId");
+		if(cdto.getCwriter().equals(memId)) {
+			service.deleteBoardComment(cdto);
+			return "/board/detailboard";
+		}
+		return "/board/detailboard";
+	}
 }

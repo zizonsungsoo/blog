@@ -79,6 +79,6 @@
 		where num=#{num}
 	</update>
 	<delete id="deleteBoardComment">
-		delete from board_comment where num=#{num} 
+		delete from board_comment where num=#{num} and cwriter=#{cwriter}
 	</delete>
 </mapper>
