@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import test.spring.component.BoardDTO;
+import test.spring.component.Board_CommentDTO;
 import test.spring.mapper.BoardMapper;
 import test.spring.utils.PagingVO;
 
@@ -15,18 +16,11 @@ import test.spring.utils.PagingVO;
 public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper mapper;
+	
 
 	@Override
 	public int insert(BoardDTO dto) {
 		return mapper.insert(dto);
-	}
-	@Override
-	public List<BoardDTO> boardList() {
-		return mapper.boardList();
-	}
-	@Override
-	public int count() {
-		return mapper.count();
 	}
 	@Override
 	public int update(BoardDTO dto) {
@@ -51,6 +45,18 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDTO> selectBoard(PagingVO vo) {
 		return mapper.selectBoard(vo);
+	}
+	@Override
+	public int insertBoardComment(Board_CommentDTO dto) {
+		return mapper.insertBoardComment(dto);
+	}
+	@Override
+	public List<Board_CommentDTO> boardConmmentAll(String num) {
+		return mapper.boardConmmentAll(num);
+	}
+	@Override
+	public int countBoardComment(String num) {
+		return mapper.countBoardComment(num);
 	}
 	
 }

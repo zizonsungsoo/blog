@@ -7,12 +7,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 @Data
 public class BoardDTO {
-	public int num;
-	public String writer;
-	public String subject;
-	public String email;
-	public String content;
-	public String password;
+	private int num;
+	private String writer;
+	private String subject;
+	private String email;
+	private String content;
+	private String password;
 	@DateTimeFormat(pattern="yyyy/MM/dd")
 	private Date reg_date;
 	private int readcount;
