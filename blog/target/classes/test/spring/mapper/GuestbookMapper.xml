@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+  
+<mapper namespace="test.spring.mapper.GuestbookMapper">
+	<insert id ="insert">
+		insert into guestbook values(guest_seq.NEXTVAL,#{writer},#{content},#{pw},sysdate)
+	</insert>
+	
+	<sql id="blo">
+		select * from guestbook
+	</sql>
+	
+	<select id = "blogList" resultType="test.spring.dto.guestbookDTO">
+		<include refid="blo"/>order by num desc
+	</select>
+	
+	<delete id="delete" parameterType="int">
+  	  delete from guestbook where num=#{num}
+	</delete>
+	
+	<update id="update" parameterType="int">
+		update content from guestbook where num=#{num}
+	</update>
+</mapper>
