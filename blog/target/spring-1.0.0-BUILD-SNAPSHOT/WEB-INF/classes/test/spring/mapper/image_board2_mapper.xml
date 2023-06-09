@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.spring.mapper.image_board2_mapper">
+
+<insert id = "insert">
+	insert into imageboard2
+	values(imageboard2_seq.nextval, #{id}, #{title}, #{content}, #{image}, #{readcount}, sysdate)
+</insert>
+
+<select id = "board2list" resultType = "board2DTO">
+	select * from imageboard2 order by num desc
+</select>
+
+<select id = "board2content" resultType = "board2DTO">
+	select * from imageboard2 where num=#{num}
+</select>
+
+</mapper>
