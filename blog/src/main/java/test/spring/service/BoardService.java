@@ -19,8 +19,9 @@ public interface BoardService {
 
 	// 페이징 처리 게시글 조회
 	public List<BoardDTO> selectBoard(PagingVO vo);
-	
+	//댓글 
 	public int insertBoardComment(Board_CommentDTO dto);
 	public List<Board_CommentDTO> boardConmmentAll(String num);
 	public int countBoardComment(String num);
+	public int updateBoardComment(Board_CommentDTO dto);
 }

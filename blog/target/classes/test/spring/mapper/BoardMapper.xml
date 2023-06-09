@@ -70,4 +70,15 @@
 	<select id="countBoardComment" resultType="int">
 		SELECT COUNT(*) FROM board_comment where num=#{num}
 	</select>
+	<!-- 댓글 수정 -->
+	<update id="updateBoardComment">
+		update board_comment
+		<set>
+			<if test="content != null">content=#{content}</if>
+		</set>
+		where num=#{num}
+	</update>
+	<delete id="deleteBoardComment">
+		delete from board_comment where num=#{num} 
+	</delete>
 </mapper>

@@ -58,5 +58,9 @@ public class BoardServiceImpl implements BoardService {
 	public int countBoardComment(String num) {
 		return mapper.countBoardComment(num);
 	}
+	@Override
+	public int updateBoardComment(Board_CommentDTO dto) {
+		return mapper.updateBoardComment(dto);
+	}
 	
 }
